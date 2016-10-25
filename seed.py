@@ -2,12 +2,12 @@
 
 from sqlalchemy import func
 from model import User
-# from model import Rating
-# from model import Movie
+from model import Rating
+from model import Movie
 
 from model import connect_to_db, db
 from server import app
-
+from datetime import datetime
 
 def load_users():
     """Load users from u.user into database."""
@@ -37,9 +37,56 @@ def load_users():
 def load_movies():
     """Load movies from u.item into database."""
 
+    User.query.delete()
+
+    # Read u.user file and insert data
+    for row in open("seed_data/u.item"):
+        row = row.rstrip()
+        row_list=row.split("|")
+        movie_id = row_list[0]
+        title_year= row_list[1] #pulls title from u.item based on index
+        title_list=list(title_year)[:-7] #makes title a list and slices title removing year
+        title=''.join(title_list) #makes title a string again
+        release_at=row_list[2]
+        imdb_url = row_list[4]
+
+
+        # movie_id, title, release_at, imdb_url=row.split("|")
+
+
+
+        if release_at:
+            release_at = datetime.strptime(release_at, "%d-%b-%Y")
+        else:
+            release_at = None
+
+        movie = Movie(movie_id=movie_id,
+                    title=title,
+                    release_at=release_at,
+                    imdb_url=imdb_url)
+
+        # We need to add to the session or it won't ever be stored
+        db.session.add(movie)
+
+    # Once we're done, we should commit our work
+    db.session.commit()
+
+
 
 def load_ratings():
     """Load ratings from u.data into database."""
+    for row in open("seed_data/u.data"):
+        row = row.rstrip()
+        user_id, movie_id, score, timestamp = row.split()
+
+        rating = Rating(user_id=user_id,
+                    movie_id=movie_id,
+                    score=score,)
+                                
+        db.session.add(rating)
+
+    # Once we're done, we should commit our work
+    db.session.commit()
 
 
 def set_val_user_id():
