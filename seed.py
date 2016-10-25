@@ -12,7 +12,7 @@ from datetime import datetime
 def load_users():
     """Load users from u.user into database."""
 
-    print "Users"
+    print "loading users"
 
     # Delete all rows in table, so if we need to run this a second time,
     # we won't be trying to add duplicate users
@@ -36,8 +36,9 @@ def load_users():
 
 def load_movies():
     """Load movies from u.item into database."""
+    print "loading movies"
 
-    User.query.delete()
+    Movie.query.delete()
 
     # Read u.user file and insert data
     for row in open("seed_data/u.item"):
@@ -75,6 +76,8 @@ def load_movies():
 
 def load_ratings():
     """Load ratings from u.data into database."""
+    Rating.query.delete()
+    print "loading ratings"
     for row in open("seed_data/u.data"):
         row = row.rstrip()
         user_id, movie_id, score, timestamp = row.split()
@@ -94,7 +97,9 @@ def set_val_user_id():
 
     # Get the Max user_id in the database
     result = db.session.query(func.max(User.user_id)).one()
+    # print result[0]
     max_id = int(result[0])
+
 
     # Set the value for the next user_id to be max_id + 1
     query = "SELECT setval('users_user_id_seq', :new_id)"

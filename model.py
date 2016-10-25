@@ -34,12 +34,19 @@ class User(db.Model):
 class Movie(db.Model):
     """Movie rating website"""
 
-    __tablename__ = "movie"
+    __tablename__ = "movies"
 
     movie_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     title = db.Column(db.String(200), nullable=False)
     release_at = db.Column(db.DateTime, nullable=True)
     imdb_url = db.Column(db.String(200), nullable=True)
+
+    def __repr__(self):
+        """Provide helpful representation when printed."""
+
+        return "<Movie movie_id=%s title=%s released_at=%s>" % (self.movie_id,
+                                                self.title,
+                                                self.release_at)
 
 
 
@@ -48,12 +55,32 @@ class Movie(db.Model):
 class Rating(db.Model):
     """Ratings of movies"""
 
-    __tablename__ = "rating"
+    __tablename__ = "ratings"
 
-    rating_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
-    movie_id = db.Column(db.Integer, nullable=False)
-    user_id = db.Column(db.Integer, nullable=False)
+    rating_id = db.Column(db.Integer, 
+                        autoincrement=True, 
+                        primary_key=True)
+    movie_id = db.Column(db.Integer, db.ForeignKey('movies.movie_id'))
+    user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'))
     score = db.Column(db.Integer, nullable=False)
+
+    # Define relationship to user
+    user = db.relationship("User",
+                           backref=db.backref("ratings",
+                                              order_by=rating_id))
+    # Define relationship to movie
+    movie = db.relationship("Movie",
+                            backref=db.backref("ratings",
+                                               order_by=rating_id))
+
+
+    def __repr__(self):
+        """Provide helpful representation when printed."""
+
+        return "<Rating rating_id=%s movie_id=%s user_id=%s score=%s>" % (self.rating_id,
+                                                self.movie_id, 
+                                                self.user_id,
+                                                self.score)
 
 
 
