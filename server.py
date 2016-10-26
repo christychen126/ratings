@@ -46,14 +46,17 @@ def register_process():
     input_email = request.form.get("user")
     input_password = request.form.get("password")
 
-    check_user = db.session.query(User).filter_by(email=input_email)
+    check_user = db.session.query(User).filter_by(email=input_email).first()
+
+    
     if check_user: 
         print "You are already registered!"
 
-        
     else:
         new_user = User(email=input_email, password=input_password)
 
+        print "hey y'all"
+        #replace with flash msg
 
         db.session.add(new_user)
         db.session.commit()
