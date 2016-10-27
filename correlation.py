@@ -5,6 +5,7 @@ from math import sqrt
 
 def pearson(pairs):
     """Return Pearson correlation for pairs.
+
     Using a set of pairwise ratings, produces a Pearson similarity rating.
     """
 
@@ -21,7 +22,7 @@ def pearson(pairs):
 
     size = len(pairs)
 
-    numerator = product_sum - ((sum_1 * sum_2) / size)
+    numerator = product_sum - ((sum_1 * sum_2)/size)
 
     denominator = sqrt(
         (squares_1 - (sum_1 * sum_1) / size) *
