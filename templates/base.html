@@ -1,27 +1,72 @@
 <!doctype html>
 <html>
 <head>
-    <title>Ratings</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <link rel="stylesheet" href="/static/style.css">
+    <link rel="shortcut icon" type="image/png" href="/favicon.png"/>
+    <link rel="shortcut icon" type="image/png" href="/static/eye.jpg"/>
+    <link href="https://fonts.googleapis.com/css?family=Cabin+Sketch" rel="stylesheet">
 </head>
+
+<div>
+
 <body>
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+     
+      <a class="navbar-brand" style="font-family: 'Cabin Sketch', cursive; color: white; font-size: 26px" href="/">EYE MDB</a>
+    </div>
 
-Ratings
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="/movies">All Movies <span class="sr-only">(current)</span></a></li>
+        <li><a href="/users">All Users</a></li>
+        
+      </ul>
 
-{% if "user_id" in session %}
-    <a href="/logout">Logout</a>
+      <ul class="nav navbar-nav navbar-right">
+        {% if "user_id" in session %}
+    <li><a href="/logout">Logout</a></li>
 {% else %}
-    <a href="/login">Login</a>
+   <li> <a href="/login">Login</a></li>
 {% endif %}
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+<div>
 
-<hr>
 
-{% for flash in get_flashed_messages() %}
-  {{ flash }}
-{% endfor %}
+
+
 
 {% block content %}
-    Put your body here.
-{% endblock %}
 
+<hr>
+{% for flash in get_flashed_messages() %}
+  {{ flash }}
+{% endfor %}{% endblock %}
+</div>
+</div>
 </body>
+
+{% block footer %}
+<br><br>
+<footer>
+
+    <span class="links";>Made with &#x2661; by  Jen&eacute;  
+        and Christy</a>, Hackbright Academy Engineering Fellows, Ada Cohort.</span> <span class="copyright";> <a href="/">Home</a> | &#9400; 2016</span>
+            </footer>
+
+                {% endblock %}
+
 </html>

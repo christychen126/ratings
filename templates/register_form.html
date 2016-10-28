@@ -1,42 +1,71 @@
 {% extends 'base.html' %}
 {% block content %}
-
+<div class= "container">
+    <div class="jumbotron">
 <h1>Register</h1>
 
-<form action="register" method="POST">
+<!-- <form action="register" method="POST">
 
-    <div>
+      <div class="form-group">
+
         <label>
             Email
             <input type="email" name="email">
         </label>
     </div>
 
-    <div>
+    <div lass="form-group">
         <label>
             Password
             <input type="password" name="password">
         </label>
     </div>
 
-    <div>
+    <div lass="form-group">
         <label>
             Age
             <input type="number" name="age">
         </label>
     </div>
 
-    <div>
+    <div lass="form-group">
         <label>
             Zipcode
             <input type="text" name="zipcode">
         </label>
     </div>
 
-    <div>
+    <div lass="form-group">
         <input type="submit" value="Register">
     </div>
 
+</form>
+</div>
+    </div>
+        </div>
+ -->
+
+
+
+        <form action="register" method="POST">
+  <div class="form-group">
+    <label for="exampleInputEmail1">Email address</label>
+    <input type="email" name="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
+  </div>
+  <div class="form-group">
+    <label for="exampleInputPassword1">Password</label>
+    <input type="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+  </div>
+  <div class="form-group">
+    <label for="age">Age</label>
+    <input type="number" class="form-control" id="age" name="age" placeholder="age">
+      </div>
+    <div class="form-group">
+    <label for="zipcode">Zipcode</label>
+    <input type="text" class="form-control" id="zipcode" name="zipcode" placeholder="zipcode">
+      </div>
+  
+  <button type="submit" value="register" class="btn btn-default">Submit</button>
 </form>
 
 {% endblock %}

@@ -1,0 +1,51 @@
+​
+
+a .special-font  {
+    font-family: 'Cabin Sketch', cursive;
+    font-size: 26px;
+    color: white;
+}
+
+#hero {
+/*background: url('static/eye.jpg')*/ no-repeat center center;
+-webkit-background-size: cover;
+-moz-background-size: cover;
+-o-background-size: cover;
+background-size: cover;
+display: table;
+width: 100%;
+}
+.hero .container {
+display: table-cell;
+text-align: center;
+vertical-align: middle;
+height: 689px
+}
+
+.movie-img {
+height: 500px;
+width: 380px;
+padding: 30px;
+}
+
+
+
+
+footer {
+    padding: 12px;
+    color:white;
+    background-color: black;
+    border-top: 5px solid white;
+    position:fixed;
+    bottom:0;
+    width: 100%;
+
+}
+
+.copyright {
+    float: right;
+}
+
+.links { 
+    float: left;
+}
